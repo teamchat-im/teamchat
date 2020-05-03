@@ -31,3 +31,7 @@ yarn-debug.log*
 .yarn-integrity
 
 /.docker-sync
+
+/.env.production
+/.env.local
+/.env.*.local

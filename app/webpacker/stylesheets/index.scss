@@ -1,1 +1,11 @@
-@import 'campo-ui/dist/css/campo-ui'
+@import 'campo-ui/dist/css/campo-ui';
+
+@import 'session';
+
+.text-align-center {
+  text-align: center;
+}
+
+.button--full-width {
+  width: 100%;
+}

@@ -1,0 +1,12 @@
+<%= custom_form_with url: sessions_path, html: { id: 'sign-in-form' } do |form| %>
+  <%= form.text_field :login %>
+  <%= form.password_field :password %>
+  <% if @sign_in_error %>
+    <div class="form__field form__field--invalid">
+      <div class="form__message">
+        Account or password is incorrect.
+      </div>
+    </div>
+  <% end %>
+  <%= form.submit 'Sign in', class: 'button button--contained button--primary button--full-width' %>
+<% end %>

@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(version: 2020_05_04_115630) do
     t.string "display_name"
     t.text "bio"
     t.string "password_digest"
+    t.string "auth_token", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index "lower((email)::text)", name: "index_users_on_lower_email", unique: true

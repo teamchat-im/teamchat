@@ -10,10 +10,34 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_04_115630) do
+ActiveRecord::Schema.define(version: 2020_05_06_142158) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "memberships", force: :cascade do |t|
+    t.bigint "room_id"
+    t.bigint "user_id"
+    t.integer "role", default: 0
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["room_id"], name: "index_memberships_on_room_id"
+    t.index ["user_id"], name: "index_memberships_on_user_id"
+  end
+
+  create_table "rooms", force: :cascade do |t|
+    t.string "uid"
+    t.integer "visibility", default: 0
+    t.string "name"
+    t.string "alias"
+    t.boolean "direct", default: false
+    t.bigint "owner_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["alias"], name: "index_rooms_on_alias", unique: true, where: "(alias IS NOT NULL)"
+    t.index ["owner_id"], name: "index_rooms_on_owner_id"
+    t.index ["uid"], name: "index_rooms_on_uid", unique: true
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "username", null: false

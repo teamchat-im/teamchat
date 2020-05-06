@@ -1,6 +1,8 @@
 class UsersController < ApplicationController
   layout 'base'
 
+  skip_before_action :require_signed_in
+
   def new
     @user = User.new
   end

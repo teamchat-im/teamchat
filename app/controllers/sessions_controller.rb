@@ -1,6 +1,8 @@
 class SessionsController < ApplicationController
   layout 'base'
 
+  skip_before_action :require_signed_in
+
   def new
     if params[:return_to]
       session[:return_to] = URI(params[:return_to]).path

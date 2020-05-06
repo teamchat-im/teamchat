@@ -9,3 +9,19 @@
 .button--full-width {
   width: 100%;
 }
+
+.dropdown__menu--small {
+  min-width: 200px;
+}
+
+.drawer__header {
+  border-bottom: 1px solid var(--border-color);
+}
+
+.drawer__item__icon {
+  margin-right: 16px;
+
+  svg {
+    fill: var(--text-secondary-color);
+  }
+}

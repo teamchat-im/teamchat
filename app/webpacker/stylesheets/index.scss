@@ -1,6 +1,7 @@
 @import 'campo-ui/dist/css/campo-ui';
 
 @import 'session';
+@import 'room';
 
 .text-align-center {
   text-align: center;
@@ -33,4 +34,8 @@
 
 .button--icon {
   justify-content: center;
+}
+
+.toolbar__space {
+  flex-grow: 1;
 }

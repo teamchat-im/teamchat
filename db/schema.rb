@@ -31,11 +31,9 @@ ActiveRecord::Schema.define(version: 2020_05_06_142158) do
     t.string "name"
     t.string "alias"
     t.boolean "direct", default: false
-    t.bigint "owner_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["alias"], name: "index_rooms_on_alias", unique: true, where: "(alias IS NOT NULL)"
-    t.index ["owner_id"], name: "index_rooms_on_owner_id"
     t.index ["uid"], name: "index_rooms_on_uid", unique: true
   end
 

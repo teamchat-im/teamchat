@@ -4,9 +4,10 @@ class RoomsController < ApplicationController
   end
 
   def create
-    @room = Room.new(room_params.merge(owner: current_user))
+    @room = Room.new room_params
 
     if @room.save
+      @room.memberships.create(user: current_user, role: 'owner')
       redirect_to @room
     else
       render 'update_form'

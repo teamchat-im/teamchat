@@ -6,7 +6,6 @@ class CreateRooms < ActiveRecord::Migration[6.0]
       t.string :name
       t.string :alias
       t.boolean :direct, default: false
-      t.references :owner
 
       t.timestamps
 

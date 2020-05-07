@@ -4,6 +4,7 @@ class Membership < ApplicationRecord
 
   enum role: {
     member: 0,
-    admin: 1
+    admin: 1,
+    owner: 2
   }
 end

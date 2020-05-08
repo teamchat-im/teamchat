@@ -1,4 +1,4 @@
 FactoryBot.define do
-  factory :membership do
+  factory :message do
   end
 end

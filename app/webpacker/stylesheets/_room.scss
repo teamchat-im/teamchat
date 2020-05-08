@@ -4,8 +4,9 @@
   flex-direction: column;
 }
 
-.room__history {
+.room__messsages {
   flex-grow: 1;
+  overflow: auto;
 }
 
 .room__composer {

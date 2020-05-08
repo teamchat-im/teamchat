@@ -1,0 +1,5 @@
+document.querySelector('#room-<%= @room.uid %>-messages').insertAdjacentHTML('beforeend', '<%= j render @message %>');
+document.querySelector('#message-<%= @message.uid %>').scrollIntoView();
+
+document.querySelector('#room-<%= @room.uid %>-message-form').outerHTML = '<%= j render "form", room: @room, message: @room.messages.new %>';
+document.querySelector('#room-<%= @room.uid %>-message-form textarea').focus();

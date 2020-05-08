@@ -1,6 +1,4 @@
 class Room < ApplicationRecord
-  self.inheritance_column = :_type_disabled
-
   has_secure_token :uid
 
   enum visibility: {
@@ -14,6 +12,7 @@ class Room < ApplicationRecord
   has_many :members, -> { where(memberships: { role: Membership.roles[:member] }) }, through: :memberships, source: :user
   has_many :admins, -> { where(memberships: { role: Membership.roles[:admin] }) }, through: :memberships, source: :user
   has_many :owners, -> { where(memberships: { role: Membership.roles[:owner] }) }, through: :memberships, source: :user
+  has_many :messages
 
   validates :uid, uniqueness: true
   validates :name, presence: true

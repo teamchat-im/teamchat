@@ -7,5 +7,7 @@ Rails.application.routes.draw do
   delete 'sign_out', to: 'sessions#destroy', as: 'sign_out'
   resources :sessions, only: [:create]
 
-  resources :rooms, only: [:new, :create, :show]
+  resources :rooms, only: [:new, :create, :show] do
+    resources :messages, only: [:index, :create, :destroy]
+  end
 end

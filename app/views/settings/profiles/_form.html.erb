@@ -1,0 +1,12 @@
+<%= custom_form_with model: current_user, url: settings_profile_path, html: { id: 'profile-form' } do |form| %>
+  <%= form.text_field :name %>
+  <%= form.text_field :username %>
+  <%= form.wrap_field :avatar do %>
+    <div>
+      <%= image_tag current_user.avatar_thumb, class: 'avatar avatar--large' %>
+    </div>
+    <%= form.file_field :avatar %>
+  <% end %>
+  <%= form.text_area :bio %>
+  <%= form.submit 'Save Changes', class: 'button button--contained button--primary' %>
+<% end %>

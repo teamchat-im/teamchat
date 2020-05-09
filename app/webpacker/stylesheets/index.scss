@@ -39,3 +39,14 @@
 .toolbar__space {
   flex-grow: 1;
 }
+
+.avatar {
+  border-radius: 100%;
+  width: 40px;
+  height: 40px;
+}
+
+.avatar--large {
+  width: 80px;
+  height: 80px;
+}

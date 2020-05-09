@@ -10,4 +10,8 @@ Rails.application.routes.draw do
   resources :rooms, only: [:new, :create, :show] do
     resources :messages, only: [:index, :create, :destroy]
   end
+
+  namespace :settings do
+    resource :profile
+  end
 end

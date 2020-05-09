@@ -13,7 +13,7 @@ class CustomFormBuilder < ActionView::Helpers::FormBuilder
     end
   end
 
-  [:text_field, :password_field].each do |method|
+  [:text_field, :password_field, :text_area].each do |method|
     define_method(method) do |attribute, options = {}|
       wrap_field(attribute, objectify_options(options)) do
         super(attribute, objectify_options(options))

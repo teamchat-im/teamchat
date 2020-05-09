@@ -1,5 +1,7 @@
-<%= custom_form_with model: [room, message], html: { id: "room-#{room.uid}-message-form"} do |form| %>
-  <%= form.text_area :body %>
+<%= form_with model: [room, message], html: { id: "room-#{room.uid}-message-form", class: 'form' } do |form| %>
+  <div class="form__field">
+    <%= form.text_area :body %>
+  </div>
   <div class="editor__toolbar">
     <div class="editor__action">
       <button type="button" class="button button--icon">

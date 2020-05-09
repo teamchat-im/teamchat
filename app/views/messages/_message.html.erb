@@ -1,7 +1,10 @@
 <div id="message-<%= message.uid %>" class="list__item message">
+  <div class="list__avatar">
+    <%= image_tag message.user.avatar_thumb, class: 'avatar' %>
+  </div>
   <div class="list__content">
     <div class="message__header">
-      <%= message.user.username %>
+      <b><%= message.user.name %></b> <%= message.user.username %>
     </div>
     <div class="message__body">
       <%= message.body %>

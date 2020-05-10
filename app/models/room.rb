@@ -18,7 +18,7 @@ class Room < ApplicationRecord
   validates :name, presence: true
   validates :alias, uniqueness: true, allow_blank: true
 
-  def visible_to(user)
+  def visible_to?(user)
     case visibility
     when 'private'
       memberships.where(user: user).exists?

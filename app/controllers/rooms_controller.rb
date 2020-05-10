@@ -17,7 +17,7 @@ class RoomsController < ApplicationController
   def show
     @room = Room.find_by! uid: params[:id]
 
-    if !@room.visible_to(current_user)
+    if !@room.visible_to?(current_user)
       raise ActiveRecord::RecordNotFound
     end
   end

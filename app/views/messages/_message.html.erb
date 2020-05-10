@@ -1,6 +1,6 @@
-<div id="message-<%= message.uid %>" class="list__item message">
+<div id="message-<%= message.uid %>" class="list__item message" data-message-id= '<%= message.uid %>'>
   <div class="list__avatar">
-    <%= image_tag message.user.avatar_thumb, class: 'avatar' %>
+    <%= image_tag url_for(message.user.avatar_thumb), class: 'avatar' %>
   </div>
   <div class="list__content">
     <div class="message__header">

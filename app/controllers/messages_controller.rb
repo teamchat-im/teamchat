@@ -5,6 +5,7 @@ class MessagesController < ApplicationController
     @message = @room.messages.new message_params.merge(user: current_user)
 
     if @message.save
+      @message.broadcast
       render 'create'
     else
       render 'update_form'

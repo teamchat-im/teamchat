@@ -17,9 +17,9 @@
     </div>
   </div>
   <div class="main">
-    <div class="room">
+    <div id="room-<%= @room.uid %>" class="room" data-controller="room" data-room-id="<%= @room.uid %>">
       <div class="room__messsages">
-        <div id="room-<%= @room.uid %>-messages" class="list">
+        <div class="list" data-target="room.messages">
           <%= render partial: 'messages/message', collection: @room.messages %>
         </div>
       </div>

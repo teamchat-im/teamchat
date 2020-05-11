@@ -1,0 +1,51 @@
+.message {
+  &:hover {
+    background: rgba(0, 0, 0, 0.05);
+  }
+}
+
+.message__header {
+  margin-bottom: 8px;
+  clear: both;
+}
+
+.message__body {
+}
+
+.message__name {
+}
+
+.message__username {
+  font-size: 14px;
+  color: var(--text-secondary-color);
+}
+
+.message__time {
+  float: right;
+  font-size: 14px;
+  color: var(--text-secondary-color);
+}
+
+.message__date-divider {
+  padding: 16px 0;
+  text-align: center;
+  position: relative;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    z-index: -1;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  span {
+    color: var(--text-secondary-color);
+    font-size: 14px;
+    font-weight: bold;
+    padding: 0 8px;
+    background: white;
+  }
+}

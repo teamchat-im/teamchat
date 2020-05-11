@@ -1,10 +1,12 @@
-<div id="message-<%= message.uid %>" class="list__item message" data-message-id= '<%= message.uid %>'>
+<div id="message-<%= message.uid %>" class="list__item message" data-message-id= '<%= message.uid %>' data-time="<%= message.created_at.iso8601 %>">
   <div class="list__avatar">
     <%= image_tag url_for(message.user.avatar_thumb), class: 'avatar' %>
   </div>
   <div class="list__content">
     <div class="message__header">
-      <b><%= message.user.name %></b> <%= message.user.username %>
+      <span class="message__name"><%= message.user.name %></span>
+      <span class="message__username">@<%= message.user.username %></span>
+      <span class="message__time"><%= local_time message.created_at, :time %></span>
     </div>
     <div class="message__body">
       <%= message.body %>

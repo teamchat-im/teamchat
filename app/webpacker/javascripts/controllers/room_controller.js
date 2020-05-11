@@ -12,6 +12,7 @@ export default class extends Controller {
 
     this.onScrollHandle = this.onScroll.bind(this)
     this.messagesTarget.addEventListener('scroll', this.onScrollHandle)
+    this.postFormat()
   }
 
   disconnect() {
@@ -39,7 +40,14 @@ export default class extends Controller {
   appendMessage(data) {
     if (!document.querySelector(`#message-${data.id}`)) {
       this.messagesTarget.insertAdjacentHTML('beforeend', data.html)
-      document.querySelector(`#message-${data.id}`).scrollIntoView();
+      let messageElement = document.querySelector(`#message-${data.id}`)
+      let date = new Date(messageElement.dataset.time).toLocaleDateString()
+      let dateDivider = this.messagesTarget.querySelector(`.message__date-divider[data-date="${date}"]`)
+      if (!dateDivider) {
+        messageElement.insertAdjacentHTML('beforeBegin', this.createDateDivider(date))
+      }
+      messageElement.dataset.formated = true
+      messageElement.scrollIntoView();
     }
   }
 
@@ -70,11 +78,36 @@ export default class extends Controller {
           this.messagesTarget.dataset.beginId = messages.dataset.beginId
           this.messagesTarget.dataset.reachedBegin = messages.dataset.reachedBegin
           this.messagesTarget.scrollTop = oldScrollTop + (this.messagesTarget.scrollHeight - oldHeight)
+          this.postFormat()
         },
         complete: () => {
           this.loadingBefore = false
         }
       })
     }
+  }
+
+  postFormat() {
+    let currentDate = null
+    this.messagesTarget.querySelectorAll('.message:not([data-formated])').forEach((messageElement) => {
+      let date = new Date(messageElement.dataset.time).toLocaleDateString()
+      if (currentDate != date) {
+        let dateDivider = this.messagesTarget.querySelector(`.message__date-divider[data-date="${date}"]`)
+        if (dateDivider) {
+          dateDivider.remove()
+        }
+        messageElement.insertAdjacentHTML('beforeBegin', this.createDateDivider(date))
+      }
+      currentDate = date
+      messageElement.dataset.formated = 'true'
+    })
+  }
+
+  createDateDivider(date) {
+    return `
+     <div class="message__date-divider" data-date="${date}">
+       <span>${date}</span>
+     </div>
+    `
   }
 }

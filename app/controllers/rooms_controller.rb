@@ -21,7 +21,7 @@ class RoomsController < ApplicationController
       raise ActiveRecord::RecordNotFound
     end
 
-    @messages = @room.messages.last(10)
+    @messages = @room.messages.last(50)
   end
 
   private

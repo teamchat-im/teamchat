@@ -2,7 +2,7 @@ class MessagesController < ApplicationController
   before_action :set_room
 
   def index
-    @messages = @room.messages.where("id < ?", params[:before].to_i).last(10)
+    @messages = @room.messages.where("id < ?", params[:before].to_i).last(50)
 
     render layout: false
   end

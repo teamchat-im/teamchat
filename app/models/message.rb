@@ -18,8 +18,8 @@ class Message < ApplicationRecord
   validates :body, presence: true
 
   def broadcast
-    ActionCable.server.broadcast(
-      "chat:#{room.uid}",
+    ChatChannel.broadcast_to(
+      room,
       id: uid,
       type: 'create',
       html: ApplicationController.render(partial: 'messages/message', object: self)

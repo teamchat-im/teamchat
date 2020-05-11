@@ -3,7 +3,7 @@ class ChatChannel < ApplicationCable::Channel
     room = Room.find_by uid: params[:room_id]
 
     if room&.visible_to?(current_user)
-      stream_from "chat:#{room.uid}"
+      stream_for room
     else
       rejct
     end

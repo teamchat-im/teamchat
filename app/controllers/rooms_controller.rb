@@ -20,6 +20,8 @@ class RoomsController < ApplicationController
     if !@room.visible_to?(current_user)
       raise ActiveRecord::RecordNotFound
     end
+
+    @messages = @room.messages.last(10)
   end
 
   private

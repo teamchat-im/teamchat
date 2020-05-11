@@ -1,0 +1,7 @@
+<div class="room__messsages list" data-target="room.messages" data-begin-id="<%= messages.first&.id %>" data-reached-begin="<%= messages.empty? %>">
+  <% if messages.empty? %>
+    TODO: beginning message
+  <% else %>
+    <%= render partial: 'messages/message', collection: messages %>
+  <% end %>
+</div>

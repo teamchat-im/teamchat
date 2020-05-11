@@ -1,6 +1,12 @@
 class MessagesController < ApplicationController
   before_action :set_room
 
+  def index
+    @messages = @room.messages.where("id < ?", params[:before].to_i).last(10)
+
+    render layout: false
+  end
+
   def create
     @message = @room.messages.new message_params.merge(user: current_user)
 

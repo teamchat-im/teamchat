@@ -18,11 +18,7 @@
   </div>
   <div class="main">
     <div id="room-<%= @room.uid %>" class="room" data-controller="room" data-room-id="<%= @room.uid %>">
-      <div class="room__messsages">
-        <div class="list" data-target="room.messages">
-          <%= render partial: 'messages/message', collection: @room.messages %>
-        </div>
-      </div>
+      <%= render 'messages/message_list', messages: @messages %>
       <div class="room__composer">
         <%= render 'messages/form', room: @room, message: @room.messages.new %>
       </div>

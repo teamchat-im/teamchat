@@ -12,9 +12,6 @@ class MessagesController < ApplicationController
 
     if @message.save
       @message.broadcast
-      render 'create'
-    else
-      render 'update_form'
     end
   end
 

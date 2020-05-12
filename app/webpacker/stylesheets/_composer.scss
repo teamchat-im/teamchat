@@ -1,0 +1,22 @@
+.composer {
+  padding: 16px;
+}
+
+.composer__input {
+  textarea {
+    width: 100%;
+    border: none;
+    margin: 0;
+    resize: none;
+    outline: 0;
+    font-size: 16px;
+  }
+}
+
+.composer__toolbar {
+  display: flex;
+}
+
+.composer__space {
+  flex-grow: 1;
+}

@@ -8,6 +8,11 @@
     "@rails/webpacker": "4.2.2",
     "campo-ui": "^0.0.5",
     "local-time": "^2.1.0",
+    "prosemirror-commands": "^1.1.4",
+    "prosemirror-keymap": "^1.1.3",
+    "prosemirror-model": "^1.9.1",
+    "prosemirror-state": "^1.3.3",
+    "prosemirror-view": "^1.14.9",
     "stimulus": "^1.1.1",
     "turbolinks": "^5.2.0"
   },

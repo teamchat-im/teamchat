@@ -3,14 +3,7 @@
 }
 
 .composer__input {
-  textarea {
-    width: 100%;
-    border: none;
-    margin: 0;
-    resize: none;
-    outline: 0;
-    font-size: 16px;
-  }
+  min-height: 24px;
 }
 
 .composer__toolbar {
@@ -19,4 +12,8 @@
 
 .composer__space {
   flex-grow: 1;
+}
+
+.ProseMirror {
+  outline: 0;
 }

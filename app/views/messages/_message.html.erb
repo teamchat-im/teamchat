@@ -9,7 +9,7 @@
       <span class="message__time"><%= local_time message.created_at, :time %></span>
     </div>
     <div class="message__body">
-      <%= message.body %>
+      <%= sanitize message.body %>
     </div>
   </div>
 </div>

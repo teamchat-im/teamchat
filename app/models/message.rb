@@ -21,6 +21,7 @@ class Message < ApplicationRecord
     ChatChannel.broadcast_to(
       room,
       id: uid,
+      username: user.username,
       type: 'create',
       html: ApplicationController.render(partial: 'messages/message', object: self)
     )

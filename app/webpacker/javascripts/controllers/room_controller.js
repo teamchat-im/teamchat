@@ -8,16 +8,34 @@ export default class extends Controller {
   connect() {
     this.subscribe_channel()
     this.element.roomController = this
-    this.messagesTarget.scrollTop = this.messagesTarget.scrollHeight
 
     this.onScrollHandle = this.onScroll.bind(this)
     this.messagesTarget.addEventListener('scroll', this.onScrollHandle)
     this.postFormat()
+
+    this.watchUpdates = true
+    this.scrollToBottom()
+    this.resizeObserver()
   }
 
   disconnect() {
     this.unsubscribe_channel()
     this.messagesTarget.removeEventListener('scroll', this.onScrollHandle)
+  }
+
+  resizeObserver() {
+    const observer = new ResizeObserver(entries => {
+      for (let entry of entries) {
+        if (this.watchUpdates) {
+          this.scrollToBottom()
+        }
+      }
+    })
+    observer.observe(this.messagesTarget)
+  }
+
+  scrollToBottom() {
+    this.messagesTarget.scrollTop = this.messagesTarget.scrollHeight
   }
 
   subscribe_channel() {
@@ -47,7 +65,10 @@ export default class extends Controller {
         messageElement.insertAdjacentHTML('beforeBegin', this.createDateDivider(date))
       }
       messageElement.dataset.formated = true
-      messageElement.scrollIntoView();
+      const meta = document.querySelector('meta[name="username"]')
+      if (data.username == (meta ? meta.content : null)) {
+        messageElement.scrollIntoView();
+      }
     }
   }
 
@@ -55,6 +76,8 @@ export default class extends Controller {
     if (this.messagesTarget.scrollTop < 400) {
       this.loadBefore()
     }
+
+    this.watchUpdates = (this.messagesTarget.scrollTop == this.messagesTarget.scrollHeight - this.messagesTarget.clientHeight)
   }
 
   loadBefore() {

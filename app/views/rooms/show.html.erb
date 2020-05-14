@@ -19,7 +19,7 @@
   <div class="main">
     <div id="room-<%= @room.uid %>" class="room" data-controller="room" data-room-id="<%= @room.uid %>">
       <%= render 'messages/message_list', messages: @messages %>
-      <div class="room__composer">
+      <div class="room__composer" data-target="room.footer">
         <%= render 'messages/form', room: @room, message: @room.messages.new %>
       </div>
     </div>

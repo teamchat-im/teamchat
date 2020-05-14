@@ -3,6 +3,8 @@
 }
 
 .composer__input {
+  min-height: 42px;
+  margin-bottom: 8px;
 }
 
 .composer__toolbar {
@@ -18,7 +20,6 @@
   padding: 8px;
   border: 1px solid var(--border-color);
   border-radius: 4px;
-  margin-bottom: 8px;
 }
 
 .ProseMirror-focused {

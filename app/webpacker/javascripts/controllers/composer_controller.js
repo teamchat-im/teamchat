@@ -53,7 +53,7 @@ export default class extends Controller {
 
   connect() {
     this.initEditor()
-    this.data.set('submitShotcut', 'Enter')
+    this.restoreShotcut()
   }
 
   submit() {
@@ -133,6 +133,16 @@ export default class extends Controller {
 
   toggleSubmitShotCut(event) {
     this.data.set('submitShotcut', event.currentTarget.dataset.shotcut)
+    this.storeShotCut()
+  }
+
+  storeShotCut() {
+    localStorage.setItem('composer.submitShotcut', this.data.get('submitShotcut'))
+  }
+
+  restoreShotcut() {
+    let shotcut = localStorage.getItem('composer.submitShotcut') || 'Enter'
+    this.data.set('submitShotcut', localStorage.getItem('composer.submitShotcut'))
   }
 
   toggleCodeBlock() {

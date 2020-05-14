@@ -53,6 +53,7 @@ export default class extends Controller {
 
   connect() {
     this.initEditor()
+    this.data.set('submitShotcut', 'Enter')
   }
 
   submit() {
@@ -96,13 +97,28 @@ export default class extends Controller {
   }
 
   createState() {
+    let keymapSetting = Object.assign({}, baseKeymap)
+    let enterCmd = keymapSetting.Enter
+    delete keymapSetting.Enter
     let state = EditorState.create({
       schema,
       plugins: [
-        keymap(baseKeymap),
+        keymap(keymapSetting),
         keymap({
-          'Ctrl-Enter': () => {
-            this.submit()
+          'Enter': (state, dispatch) => {
+            if (this.data.get('submitShotcut') == 'Enter') {
+              this.submit()
+            } else {
+              enterCmd(state,dispatch)
+            }
+            return true
+          },
+          'Ctrl-Enter': (state, dispatch) => {
+            if (this.data.get('submitShotcut') == 'Ctrl-Enter') {
+              this.submit()
+            } else {
+              enterCmd(state,dispatch)
+            }
             return true
           },
           'Shift-Enter': (state, dispatch) => {
@@ -113,6 +129,10 @@ export default class extends Controller {
       ]
     })
     return state
+  }
+
+  toggleSubmitShotCut(event) {
+    this.data.set('submitShotcut', event.currentTarget.dataset.shotcut)
   }
 
   toggleCodeBlock() {

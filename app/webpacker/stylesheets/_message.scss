@@ -10,6 +10,17 @@
 }
 
 .message__body {
+  p, pre {
+    margin: 4px 0;
+
+    &:first-child {
+      margin-top: 0;
+    }
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
 }
 
 .message__name {

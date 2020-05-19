@@ -53,7 +53,7 @@ export default class extends Controller {
 
   connect() {
     this.initEditor()
-    this.restoreShotcut()
+    this.restoreShortcut()
   }
 
   submit() {
@@ -106,7 +106,7 @@ export default class extends Controller {
         keymap(keymapSetting),
         keymap({
           'Enter': (state, dispatch) => {
-            if (this.data.get('submitShotcut') == 'Enter') {
+            if (this.data.get('submitShortcut') == 'Enter') {
               this.submit()
             } else {
               enterCmd(state,dispatch)
@@ -114,7 +114,7 @@ export default class extends Controller {
             return true
           },
           'Ctrl-Enter': (state, dispatch) => {
-            if (this.data.get('submitShotcut') == 'Ctrl-Enter') {
+            if (this.data.get('submitShortcut') == 'Ctrl-Enter') {
               this.submit()
             } else {
               enterCmd(state,dispatch)
@@ -131,18 +131,18 @@ export default class extends Controller {
     return state
   }
 
-  toggleSubmitShotCut(event) {
-    this.data.set('submitShotcut', event.currentTarget.dataset.shotcut)
-    this.storeShotCut()
+  toggleSubmitShortcut(event) {
+    this.data.set('submitShortcut', event.currentTarget.dataset.shortcut)
+    this.storeShortcut()
   }
 
-  storeShotCut() {
-    localStorage.setItem('composer.submitShotcut', this.data.get('submitShotcut'))
+  storeShortcut() {
+    localStorage.setItem('composer.submitShortcut', this.data.get('submitShortcut'))
   }
 
-  restoreShotcut() {
-    let shotcut = localStorage.getItem('composer.submitShotcut') || 'Enter'
-    this.data.set('submitShotcut', localStorage.getItem('composer.submitShotcut'))
+  restoreShortcut() {
+    let shortcut = localStorage.getItem('composer.submitShortcut') || 'Enter'
+    this.data.set('submitShortcut', shortcut)
   }
 
   toggleCodeBlock() {

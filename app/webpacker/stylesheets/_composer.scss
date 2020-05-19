@@ -26,19 +26,19 @@
   border-color: var(--primary-color)
 }
 
-.composer__shotcut-enter,
-.composer__shotcut-ctrl-enter {
+.composer__shortcut-enter,
+.composer__shortcut-ctrl-enter {
   display: none;
 }
 
-.composer[data-composer-submit-shotcut="Enter"] {
-  .composer__shotcut-enter {
+.composer[data-composer-submit-shortcut="Enter"] {
+  .composer__shortcut-enter {
     display: inline-block;
   }
 }
 
-.composer[data-composer-submit-shotcut="Ctrl-Enter"] {
-  .composer__shotcut-ctrl-enter {
+.composer[data-composer-submit-shortcut="Ctrl-Enter"] {
+  .composer__shortcut-ctrl-enter {
     display: inline-block;
   }
 }

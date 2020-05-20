@@ -53,7 +53,7 @@ export default class extends Controller {
 
   connect() {
     this.initEditor()
-    this.restoreShortcut()
+    this.restoreSettings()
   }
 
   submit() {
@@ -131,18 +131,25 @@ export default class extends Controller {
     return state
   }
 
+  toggleFormatting() {
+    this.element.classList.toggle('composer--formatting')
+    localStorage.setItem('composer.enableFormatting', this.element.classList.contains('composer--formatting'))
+    this.editorView.focus()
+  }
+
   toggleSubmitShortcut(event) {
-    this.data.set('submitShortcut', event.currentTarget.dataset.shortcut)
-    this.storeShortcut()
+    let shortcut = event.currentTarget.dataset.shortcut
+    this.data.set('submitShortcut', shortcut)
+    localStorage.setItem('composer.submitShortcut', shortcut)
   }
 
-  storeShortcut() {
-    localStorage.setItem('composer.submitShortcut', this.data.get('submitShortcut'))
-  }
-
-  restoreShortcut() {
+  restoreSettings() {
     let shortcut = localStorage.getItem('composer.submitShortcut') || 'Enter'
     this.data.set('submitShortcut', shortcut)
+
+    if (localStorage.getItem('composer.enableFormatting') == 'true') {
+      this.element.classList.add('composer--formatting')
+    }
   }
 
   toggleCodeBlock() {

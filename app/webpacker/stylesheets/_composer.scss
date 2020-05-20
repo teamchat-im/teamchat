@@ -1,14 +1,55 @@
 .composer {
-  padding: 16px;
+  margin: 16px 16px 0;
+}
+
+.composer__body {
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  display: flex;
+  align-items: flex-end;
+}
+
+.composer__footer {
+  text-align: right;
+  margin-bottom: 4px;
+
+  .button--text {
+    padding: 4px 8px;
+    font-size: 14px;
+    color: var(--text-secondary-color);
+  }
 }
 
 .composer__input {
-  min-height: 42px;
-  margin-bottom: 8px;
+  flex-grow: 1;
+  padding: 10px;
+  overflow: hidden;
 }
 
 .composer__toolbar {
   display: flex;
+  padding: 4px;
+}
+
+.composer__formatting {
+  display: none;
+}
+
+.composer--formatting {
+  .composer__body {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .composer__formatting {
+    display: flex;
+    margin-right: auto;
+  }
+
+  .composer__toolbar {
+    border-top: 1px solid var(--border-color);
+    background: rgba(0, 0, 0, 0.05);
+  }
 }
 
 .composer__space {
@@ -17,13 +58,9 @@
 
 .ProseMirror {
   outline: 0;
-  padding: 8px;
-  border: 1px solid var(--border-color);
-  border-radius: 4px;
 }
 
 .ProseMirror-focused {
-  border-color: var(--primary-color)
 }
 
 .composer__shortcut-enter,

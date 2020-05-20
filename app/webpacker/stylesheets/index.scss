@@ -38,6 +38,15 @@
   justify-content: center;
 }
 
+.button--toggle {
+  background: transparent;
+  border-radius: 4px;
+
+  svg {
+    fill: var(--text-secondary-color);
+  }
+}
+
 .toolbar__space {
   flex-grow: 1;
 }

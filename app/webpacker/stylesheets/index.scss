@@ -72,3 +72,9 @@ pre {
 .text-secondary {
   color: var(--text-secondary-color);
 }
+
+.uploader {
+  input[type="file"] {
+    display: none;
+  }
+}

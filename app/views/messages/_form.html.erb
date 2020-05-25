@@ -1,11 +1,12 @@
-<div class="composer" data-controller="composer" data-composer-submit-url="<%= url_for([room, message]) %>">
+<div class="composer" data-controller="composer" data-composer-submit-url="<%= url_for([room, message]) %>" data-composer-direct-upload-url="<%= rails_direct_uploads_url %>">
   <div class="composer__input message__body" data-target="composer.input">
   </div>
   <div class="composer__toolbar">
     <div class="composer__action">
-      <button type="button" class="button button--toggle">
+      <label type="button" class="button button--toggle uploader">
         <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/><path d="M0 0h24v24H0z" fill="none"/></svg>
-      </button>
+        <input type="file" data-action="change->composer#imageSubmit">
+      </label>
     </div>
     <div class="composer__action">
       <button type="button" class="button button--toggle">
@@ -13,7 +14,7 @@
       </button>
     </div>
     <div class="composer__action">
-      <button type="button" class="button button--toggle">
+      <button type="button" class="button button--toggle" data-action="composer#submit">
         <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M3.4 20.4l17.45-7.48c.81-.35.81-1.49 0-1.84L3.4 3.6c-.66-.29-1.39.2-1.39.91L2 9.12c0 .5.37.93.87.99L17 12 2.87 13.88c-.5.07-.87.5-.87 1l.01 4.61c0 .71.73 1.2 1.39.91z"/></svg>
       </button>
     </div>

@@ -9,7 +9,11 @@
       <span class="message__time"><%= local_time message.created_at, :time %></span>
     </div>
     <div class="message__body">
-      <%= sanitize message.body %>
+      <% case message.type when 'image' %>
+        <%= image_tag message.file %>
+      <% else %>
+        <%= sanitize message.body %>
+      <% end %>
     </div>
   </div>
 </div>

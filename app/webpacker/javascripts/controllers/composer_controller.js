@@ -1,5 +1,6 @@
 import { Controller } from 'stimulus'
 import Rails from "@rails/ujs"
+import { DirectUpload } from "@rails/activestorage"
 import { Schema, DOMParser, DOMSerializer } from "prosemirror-model"
 import { EditorState } from "prosemirror-state"
 import { EditorView } from "prosemirror-view"
@@ -60,6 +61,33 @@ export default class extends Controller {
         this.reset()
       }
     })
+    this.editorView.focus()
+  }
+
+  imageSubmit(event) {
+    const uploadUrl = this.data.get('directUploadUrl')
+    const submitUrl = this.data.get('submitUrl')
+    Array.from(event.target.files).forEach((file) => {
+      const upload = new DirectUpload(file, uploadUrl)
+      upload.create((error, blob) => {
+        if (error) {
+        } else {
+          let formData = new FormData()
+          formData.set('message[type]', 'image')
+          formData.set('message[body]', blob.filename)
+          formData.set('message[file]', blob.signed_id)
+          Rails.ajax({
+            url: this.data.get('submitUrl'),
+            type: 'post',
+            accept: 'script',
+            data: formData,
+            success: () => {
+            }
+          })
+        }
+      })
+    })
+    this.editorView.focus()
   }
 
   reset() {

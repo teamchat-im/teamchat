@@ -8,15 +8,9 @@ import { baseKeymap, setBlockType } from "prosemirror-commands"
 
 const schema = new Schema({
   nodes: {
-    doc: { content: "block+" },
+    doc: { content: "inline*" },
     text: {
       group: "inline"
-    },
-    paragraph: {
-      content: "inline*",
-      group: "block",
-      parseDOM: [{tag: "p"}],
-      toDOM() { return ["p", 0] }
     },
     hard_break: {
       inline: true,
@@ -24,15 +18,6 @@ const schema = new Schema({
       selectable: false,
       parseDOM: [{tag: "br"}],
       toDOM() { return ["br"] }
-    },
-    code_block: {
-      content: "text*",
-      marks: "",
-      group: "block",
-      code: true,
-      defining: true,
-      parseDOM: [{tag: "pre", preserveWhitespace: "full"}],
-      toDOM() { return ["pre", ["code", 0]] }
     }
   }
 })
@@ -58,8 +43,9 @@ export default class extends Controller {
 
   submit() {
     let body = this.inputValue()
+    console.log(body)
 
-    if (body == '<p></p>') {
+    if (body == '') {
       return
     }
 
@@ -92,7 +78,6 @@ export default class extends Controller {
   initEditor() {
     let state = this.createState()
     this.editorView = new EditorView(this.inputTarget, { state })
-    this.editorView.formatCode = setBlockType(this.editorView.state.schema.nodes.code_block)
     this.editorView.focus()
   }
 
@@ -106,19 +91,7 @@ export default class extends Controller {
         keymap(keymapSetting),
         keymap({
           'Enter': (state, dispatch) => {
-            if (this.data.get('submitShortcut') == 'Enter') {
-              this.submit()
-            } else {
-              enterCmd(state,dispatch)
-            }
-            return true
-          },
-          'Ctrl-Enter': (state, dispatch) => {
-            if (this.data.get('submitShortcut') == 'Ctrl-Enter') {
-              this.submit()
-            } else {
-              enterCmd(state,dispatch)
-            }
+            this.submit()
             return true
           },
           'Shift-Enter': (state, dispatch) => {

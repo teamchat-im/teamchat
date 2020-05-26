@@ -1,3 +1,5 @@
+require 'sidekiq/web'
+
 Rails.application.routes.draw do
   root 'home#index'
 
@@ -14,4 +16,6 @@ Rails.application.routes.draw do
   namespace :settings do
     resource :profile
   end
+
+  mount Sidekiq::Web => '/sidekiq'
 end

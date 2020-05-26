@@ -87,6 +87,7 @@ export default class extends Controller {
         }
       })
     })
+    event.target.value = ''
     this.editorView.focus()
   }
 

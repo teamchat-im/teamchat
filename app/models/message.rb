@@ -18,8 +18,27 @@ class Message < ApplicationRecord
 
   validates :body, presence: true
 
+  SIZE_LIMIT = 1024
+  def file_thumb
+    file.variant(resize_to_limit: [SIZE_LIMIT, SIZE_LIMIT], loader: { page: nil })
+  end
+
+  PREVIEW_SIZE = 200
+  def file_thumb_metadata
+    width = file.blob.metadata['width']
+    height = file.blob.metadata['height']
+    if width > height
+      { 'width' => PREVIEW_SIZE, 'height' => (height.to_f / width * PREVIEW_SIZE) }
+    else
+      { 'width' => (width.to_f / height * PREVIEW_SIZE), 'height' => PREVIEW_SIZE }
+    end
+  end
+
   def broadcast
     renderer = ApplicationController.renderer.new(http_host: ENV['HOST'], https: ENV['FORCE_SSL'] == 'true')
+
+    file&.analyze
+
     ChatChannel.broadcast_to(
       room,
       id: uid,

@@ -50,11 +50,11 @@ ActiveRecord::Schema.define(version: 2020_05_09_075732) do
     t.bigint "room_id"
     t.bigint "user_id"
     t.string "uid"
-    t.integer "type", default: 0
     t.text "body"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["room_id"], name: "index_messages_on_room_id"
+    t.index ["uid"], name: "index_messages_on_uid", unique: true
     t.index ["user_id"], name: "index_messages_on_user_id"
   end
 

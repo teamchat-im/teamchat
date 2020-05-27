@@ -67,7 +67,15 @@
   }
 }
 
-.message__meta {
+.message__file {
+  svg {
+    width: 48px;
+    height: 48px;
+    fill: var(--text-secondary-color);
+  }
+}
+
+.message__file-attributes {
 }
 
 .message__file-attribute {

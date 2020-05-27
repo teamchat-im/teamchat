@@ -1,4 +1,4 @@
-<div id="message-<%= message.uid %>" class="list__item message <%= "message--#{message.type}" %>" data-message-id= '<%= message.uid %>' data-time="<%= message.created_at.iso8601 %>">
+<div id="message-<%= message.uid %>" class="list__item message" data-message-id= '<%= message.uid %>' data-time="<%= message.created_at.iso8601 %>">
   <div class="list__avatar">
     <%= image_tag url_for(message.user.avatar_thumb), class: 'avatar' %>
   </div>
@@ -9,15 +9,29 @@
       <span class="message__time"><%= local_time message.created_at, :time %></span>
     </div>
     <div class="message__body">
-      <% case message.type when 'image' %>
-        <div class="message__image">
-          <%= image_tag message.file_thumb, width: message.file_thumb_metadata['width'], height: message.file_thumb_metadata['height'] %>
-        </div>
-        <div class="message__file-meta">
+      <% if message.file.attached? %>
+        <% if message.file.image? %>
+          <div class="message__image">
+            <%= image_tag message.file.variant(resize_to_limit: [1024, 1024], loader: { page: nil }), width: message.file_thumb_metadata['width'], height: message.file_thumb_metadata['height'] %>
+          </div>
+        <% elsif message.file.video? %>
+          <video src="<%= url_for(message.file) %>" poster="<%= url_for(message.file.preview(resize_to_limit: [1024, 1024])) %>" controls width="<%= message.file_thumb_metadata['width'] %>" height="<%= message.file_thumb_metadata['height'] %>">
+          </video>
+        <% elsif message.file.audio? %>
+          <audio src="<%= url_for(message.file) %>" controls>
+          </audio>
+        <% else %>
+          <div class="message__file">
+            <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M14.59 2.59c-.38-.38-.89-.59-1.42-.59H6c-1.1 0-2 .9-2 2v16c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8.83c0-.53-.21-1.04-.59-1.41l-4.82-4.83zM15 18H9c-.55 0-1-.45-1-1s.45-1 1-1h6c.55 0 1 .45 1 1s-.45 1-1 1zm0-4H9c-.55 0-1-.45-1-1s.45-1 1-1h6c.55 0 1 .45 1 1s-.45 1-1 1zm-2-6V3.5L18.5 9H14c-.55 0-1-.45-1-1z"/></svg>
+          </div>
+        <% end %>
+        <div class="message__file-attributes">
           <span class="message__file-attribute"><%= message.file.blob.filename %></span>
           <span class="message__file-attribute"><%= number_to_human_size message.file.blob.byte_size %></span>
-          <span class="message__file-attribute"><%= link_to 'View full-size', message.file, target: '_blank' %></span>
-          <span class="message__file-attribute"><%= link_to 'Download', rails_blob_path(message.file, disposition: 'attachment') %></span>
+          <% if message.file.image? || message.file.video? %>
+            <span class="message__file-attribute"><%= link_to 'View full-size', message.file, target: '_blank' %></span>
+          <% end %>
+          <span class="message__file-attribute"><%= link_to 'Download', rails_blob_path(message.file, disposition: 'attachment'), target: '_blank' %></span>
         </div>
       <% else %>
         <%= sanitize message.body %>

@@ -4,7 +4,6 @@ class CreateMessages < ActiveRecord::Migration[6.0]
       t.references :room
       t.references :user
       t.string :uid
-      t.integer :type, default: 0
       t.text :body
 
       t.timestamps

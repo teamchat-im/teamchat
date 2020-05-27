@@ -64,7 +64,7 @@ export default class extends Controller {
     this.editorView.focus()
   }
 
-  imageSubmit(event) {
+  uploadFile(event) {
     const uploadUrl = this.data.get('directUploadUrl')
     const submitUrl = this.data.get('submitUrl')
     Array.from(event.target.files).forEach((file) => {

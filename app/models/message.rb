@@ -18,17 +18,9 @@ class Message < ApplicationRecord
     end
   end
 
-  def broadcast
-    renderer = ApplicationController.renderer.new(http_host: ENV['HOST'], https: ENV['FORCE_SSL'] == 'true')
+  after_create_commit :deliver_later
 
-    file&.analyze
-
-    ChatChannel.broadcast_to(
-      room,
-      id: uid,
-      username: user.username,
-      type: 'create',
-      html: renderer.render(partial: 'messages/message', object: self)
-    )
+  def deliver_later
+    MessageDeliverJob.perform_later(self)
   end
 end

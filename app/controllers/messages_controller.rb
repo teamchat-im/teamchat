@@ -9,10 +9,7 @@ class MessagesController < ApplicationController
 
   def create
     @message = @room.messages.new message_params.merge(user: current_user)
-
-    if @message.save
-      @message.broadcast
-    end
+    @message.save
   end
 
   private

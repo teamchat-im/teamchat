@@ -10,6 +10,11 @@ class MessagesController < ApplicationController
   def create
     @message = @room.messages.new message_params.merge(user: current_user)
     @message.save
+
+    render json: {
+      id: @message.uid,
+      username: current_user.username
+    }
   end
 
   private

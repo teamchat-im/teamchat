@@ -83,3 +83,20 @@ audio,
 video {
   outline: 0;
 }
+
+.progress {
+  position: relative;
+  height: 4px;
+  width: 100%;
+  border-radius: 2px;
+  overflow: hidden;
+  margin: 8px 0;
+}
+
+.progress__bar {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 4px;
+  background: var(--primary-color);
+}

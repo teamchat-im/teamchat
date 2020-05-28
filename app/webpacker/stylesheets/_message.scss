@@ -90,3 +90,30 @@
     content: ' · '
   }
 }
+
+.message__uploader {
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  max-width: 400px;
+  display: flex;
+}
+
+.message__uploader__icon {
+  padding: 16px;
+  line-height: 1;
+
+  svg {
+    width: 40px;
+    height: 40px;
+    fill: var(--text-secondary-color);
+  }
+}
+
+.message__uploader__content {
+  padding: 16px 0;
+  flex-grow: 1;
+}
+
+.message__uploader__action {
+  padding: 8px;
+}

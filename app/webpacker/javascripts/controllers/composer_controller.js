@@ -34,12 +34,25 @@ const hasBlockType = function(state, nodeType) {
   }
 }
 
+function formatBytes(bytes, decimals = 2) {
+    if (bytes === 0) return '0 Bytes';
+
+    const k = 1024;
+    const dm = decimals < 0 ? 0 : decimals;
+    const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+
+    const i = Math.floor(Math.log(bytes) / Math.log(k));
+
+    return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
+}
+
 export default class extends Controller {
-  static targets = ['input']
+  static targets = ['input', 'messageUploaderTemplate']
 
   connect() {
     this.initEditor()
     this.restoreSettings()
+    this.roomController = this.element.closest('.room').roomController
   }
 
   submit() {
@@ -55,7 +68,7 @@ export default class extends Controller {
     Rails.ajax({
       url: this.data.get('submitUrl'),
       type: 'post',
-      accept: 'script',
+      accept: 'json',
       data: formData,
       success: () => {
         this.reset()
@@ -68,7 +81,27 @@ export default class extends Controller {
     const uploadUrl = this.data.get('directUploadUrl')
     const submitUrl = this.data.get('submitUrl')
     Array.from(event.target.files).forEach((file) => {
-      const upload = new DirectUpload(file, uploadUrl)
+      let messageUploader = document.importNode(this.messageUploaderTemplateTarget.content, true)
+      const uploaderElement = messageUploader.querySelector('.message')
+      this.roomController.messagesTarget.insertAdjacentElement('beforeend', uploaderElement)
+      uploaderElement.file = file
+      uploaderElement.querySelector('.filename').textContent = file.name
+      uploaderElement.querySelector('.size').textContent = formatBytes(file.size)
+      uploaderElement.scrollIntoView()
+      const progressBar = uploaderElement.querySelector('.progress__bar')
+      const cancelButton = uploaderElement.querySelector('.cancel')
+      const upload = new DirectUpload(file, uploadUrl, {
+        directUploadWillStoreFileWithXHR: (xhr) => {
+          xhr.upload.addEventListener('progress', (event) => {
+            progressBar.style.width = `${event.loaded / event.total * 100}%`
+          })
+
+          cancelButton.addEventListener('click', () => {
+            xhr.abort()
+            uploaderElement.remove()
+          })
+        }
+      })
       upload.create((error, blob) => {
         if (error) {
         } else {
@@ -79,9 +112,11 @@ export default class extends Controller {
           Rails.ajax({
             url: this.data.get('submitUrl'),
             type: 'post',
-            accept: 'script',
+            accept: 'json',
             data: formData,
-            success: () => {
+            success: (data) => {
+              // will be deleted by room appendMessage
+              uploaderElement.id = `message-${data.id}`
             }
           })
         }

@@ -56,19 +56,22 @@ export default class extends Controller {
   }
 
   appendMessage(data) {
-    if (!document.querySelector(`#message-${data.id}`)) {
-      this.messagesTarget.insertAdjacentHTML('beforeend', data.html)
-      let messageElement = document.querySelector(`#message-${data.id}`)
-      let date = new Date(messageElement.dataset.time).toLocaleDateString()
-      let dateDivider = this.messagesTarget.querySelector(`.message__date-divider[data-date="${date}"]`)
-      if (!dateDivider) {
-        messageElement.insertAdjacentHTML('beforeBegin', this.createDateDivider(date))
-      }
-      messageElement.dataset.formated = true
-      const meta = document.querySelector('meta[name="username"]')
-      if (data.username == (meta ? meta.content : null)) {
-        messageElement.scrollIntoView();
-      }
+    const existsMessageElement = document.querySelector(`#message-${data.id}`)
+    if (existsMessageElement) {
+      existsMessageElement.remove()
+    }
+
+    this.messagesTarget.insertAdjacentHTML('beforeend', data.html)
+    let messageElement = document.querySelector(`#message-${data.id}`)
+    let date = new Date(messageElement.dataset.time).toLocaleDateString()
+    let dateDivider = this.messagesTarget.querySelector(`.message__date-divider[data-date="${date}"]`)
+    if (!dateDivider) {
+      messageElement.insertAdjacentHTML('beforeBegin', this.createDateDivider(date))
+    }
+    messageElement.dataset.formated = true
+    const meta = document.querySelector('meta[name="username"]')
+    if (data.username == (meta ? meta.content : null)) {
+      messageElement.scrollIntoView();
     }
   }
 

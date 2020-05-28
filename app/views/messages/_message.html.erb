@@ -15,10 +15,10 @@
             <%= image_tag message.file.variant(resize_to_limit: [1024, 1024], loader: { page: nil }), width: message.file_thumb_metadata['width'], height: message.file_thumb_metadata['height'] %>
           </div>
         <% elsif message.file.video? %>
-          <video src="<%= url_for(message.file) %>" poster="<%= url_for(message.file.preview(resize_to_limit: [1024, 1024])) %>" controls width="<%= message.file_thumb_metadata['width'] %>" height="<%= message.file_thumb_metadata['height'] %>">
+          <video src="<%= url_for(message.file) %>" poster="<%= url_for(message.file.preview(resize_to_limit: [1024, 1024])) %>" controls preload="none" width="<%= message.file_thumb_metadata['width'] %>" height="<%= message.file_thumb_metadata['height'] %>">
           </video>
         <% elsif message.file.audio? %>
-          <audio src="<%= url_for(message.file) %>" controls>
+          <audio src="<%= url_for(message.file) %>" controls preload="none">
           </audio>
         <% else %>
           <div class="message__file">

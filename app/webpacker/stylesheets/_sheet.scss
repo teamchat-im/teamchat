@@ -1,0 +1,40 @@
+.sheet-wrapper {
+  height: 100%;
+  display: flex;
+}
+
+.sheet {
+  flex-shrink: 0;
+}
+
+.sheet__container {
+  margin-right: -240px;
+  display: flex;
+  flex-direction: column;
+  width: 240px;
+  box-sizing: border-box;
+  border-left: 1px solid var(--border-color);
+  background: white;
+  overflow: auto;
+  height: 100%;
+}
+
+.sheet--open .sheet__container {
+  margin-right: 0;
+}
+
+.sheet__header {
+  flex-shrink: 0;
+}
+
+.sheet__body {
+  flex-grow: 1;
+}
+
+.sheet__footer {
+  flex-shrink: 0;
+}
+
+.sheet__scrim {
+  display: none;
+}

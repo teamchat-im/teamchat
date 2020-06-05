@@ -44,24 +44,13 @@
                       </button>
                     </div>
                     <div class="dialog__body">
-                      <div class="selector" data-controller="selector">
+                      <div class="selector" data-controller="selector" data-selector-remote-url="<%= users_search_index_path %>">
                         <div class="selector__input">
-                          <% 3.times do %>
-                          <div class="chip">
-                            <div class="chip__thumb">
-                              <img src="<%= url_for(current_user.avatar_thumb) %>">
-                            </div>
-                            <%= current_user.username %>
-                            <div class="chip__icon">
-                              <button type="button" class="button button--icon" data-action="selector#remove">
-                                <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0V0z" fill="none" opacity=".87"/><path d="M12 2C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2zm4.3 14.3c-.39.39-1.02.39-1.41 0L12 13.41 9.11 16.3c-.39.39-1.02.39-1.41 0-.39-.39-.39-1.02 0-1.41L10.59 12 7.7 9.11c-.39-.39-.39-1.02 0-1.41.39-.39 1.02-.39 1.41 0L12 10.59l2.89-2.89c.39-.39 1.02-.39 1.41 0 .39.39.39 1.02 0 1.41L13.41 12l2.89 2.89c.38.38.38 1.02 0 1.41z"/></svg>
-                              </button>
-                            </div>
-                          </div>
-                          <% end %>
-                          <input type="text" value="" data-target="selector.input">
+                          <input type="text" value="" data-target="selector.input" placeholder="Name or Username">
                         </div>
                         <div class="selector__dropdown">
+                          <div class="list" data-target="selector.options">
+                          </div>
                         </div>
                       </div>
                     </div>

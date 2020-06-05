@@ -1,3 +1,7 @@
+.selector {
+  position: relative;
+}
+
 .selector__input {
   display: flex;
   flex-wrap: wrap;
@@ -20,6 +24,36 @@
   }
 }
 
-.selector__input--focus {
-  border: 1px solid var(--primary-color);
+.selector__dropdown {
+  display: none;
+}
+
+.selector--focus {
+  .selector__input {
+    border: 1px solid var(--primary-color);
+  }
+
+  .selector__dropdown {
+    display: block;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 1;
+    background: white;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  }
+}
+
+.selector .list__item {
+  cursor: pointer;
+
+  &:hover {
+    background: rgba(0, 0, 0, 0.05);
+  }
+
+  &.list__item--focus {
+    background: rgba(0, 0, 0, 0.1);
+  }
 }

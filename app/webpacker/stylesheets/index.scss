@@ -103,3 +103,7 @@ video {
   height: 4px;
   background: var(--primary-color);
 }
+
+.dialog__body {
+  overflow: inherit;
+}

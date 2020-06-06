@@ -25,25 +25,19 @@
 }
 
 .selector__dropdown {
-  display: none;
+  display: block;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 1;
+  background: white;
+  border-radius: 4px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
 }
 
-.selector--focus {
-  .selector__input {
-    border: 1px solid var(--primary-color);
-  }
-
-  .selector__dropdown {
-    display: block;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    z-index: 1;
-    background: white;
-    border-radius: 4px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
-  }
+.selector__input:focus-within {
+  border: 1px solid var(--primary-color);
 }
 
 .selector .list__item {

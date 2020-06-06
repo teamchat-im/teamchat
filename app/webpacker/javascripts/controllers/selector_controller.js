@@ -6,8 +6,6 @@ export default class extends Controller {
 
   connect() {
     this.inputTarget.addEventListener('keydown', this.keydown.bind(this))
-    this.inputTarget.addEventListener('focus', this.focus.bind(this))
-    this.inputTarget.addEventListener('blur', this.blur.bind(this))
     this.inputTarget.addEventListener('keyup', this.updateOptions.bind(this))
 
     this.index = 0
@@ -103,14 +101,6 @@ export default class extends Controller {
     })
   }
 
-  focus() {
-    this.element.classList.add('selector--focus')
-  }
-
-  blur() {
-    this.element.classList.remove('selector--focus')
-  }
-
   cleanOptions() {
     this.optionsTarget.innerHTML = ''
   }
@@ -133,6 +123,7 @@ export default class extends Controller {
     const item = event.currentTarget
     this.appendChip(item.dataset.name, item.dataset.value, item.dataset.thumbUrl)
     this.cleanOptions()
+    this.inputTarget.focus()
   }
 
   appendChip(name, value, thumbUrl = null) {

@@ -1682,10 +1682,10 @@ camelcase@^5.0.0, camelcase@^5.3.1:
   resolved "https://registry.yarnpkg.com/camelcase/-/camelcase-5.3.1.tgz#e3c9b31569e106811df242f715725a1f4c494320"
   integrity sha512-L28STB170nwWS63UjtlEOE3dldQApaJXZkOI1uMFfzf3rRuPegHaHesyee+YxQ+W6SvRDQV6UrdOdRiR153wJg==
 
-campo-ui@^0.0.5:
-  version "0.0.5"
-  resolved "https://registry.yarnpkg.com/campo-ui/-/campo-ui-0.0.5.tgz#9b93ea8356792061b735a03043f632071e9845e4"
-  integrity sha512-EWJKV2ympuusGO0cJ6aBUZq59MEmX4BECKIlYqywCx1UPLR13QqzQeAqAuk0PbeiVjM63GPRD9KpOosSFCVpCA==
+campo-ui@^0.0.6:
+  version "0.0.6"
+  resolved "https://registry.yarnpkg.com/campo-ui/-/campo-ui-0.0.6.tgz#25793bf2fe718f6e1fc9e789bebac8f6c74160ba"
+  integrity sha512-lmgUw8TNtfqkp+/5DBT3EJf1CFZHD0c15XvThX9EbiYcjqglbB1bwDIdz1zRZ3VX9+haios/LWdwo7xh32fusw==
 
 caniuse-api@^3.0.0:
   version "3.0.0"

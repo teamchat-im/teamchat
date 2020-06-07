@@ -24,6 +24,10 @@ export default class extends Controller {
     `)
   }
 
+  focus() {
+    this.inputTarget.focus()
+  }
+
   updateOutput() {
     this.outputTarget.value = this.itemTargets.map((item) => {
       return item.dataset.value
@@ -141,7 +145,7 @@ export default class extends Controller {
     const item = event.currentTarget
     this.appendChip(item.dataset.name, item.dataset.value, item.dataset.thumbUrl)
     this.cleanOptions()
-    this.inputTarget.focus()
+    this.focus()
   }
 
   appendChip(name, value, thumbUrl = null) {
@@ -153,13 +157,13 @@ export default class extends Controller {
     }
 
     this.inputTarget.insertAdjacentHTML('beforeBegin', `
-      <div class="chip" data-target="selector.item" data-value="${value}">
-        <div class="chip__thumb">
+      <div class="chip" data-controller="chip" data-target="selector.item" data-value="${value}">
+        <div class="chip__icon">
           ${thumb}
         </div>
         ${name}
-        <div class="chip__icon">
-          <button type="button" class="button button--icon" data-action="selector#remove">
+        <div class="chip__action">
+          <button type="button" class="button button--icon" data-action="chip#remove selector#focus">
             <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0V0z" fill="none" opacity=".87"/><path d="M12 2C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2zm4.3 14.3c-.39.39-1.02.39-1.41 0L12 13.41 9.11 16.3c-.39.39-1.02.39-1.41 0-.39-.39-.39-1.02 0-1.41L10.59 12 7.7 9.11c-.39-.39-.39-1.02 0-1.41.39-.39 1.02-.39 1.41 0L12 10.59l2.89-2.89c.39-.39 1.02-.39 1.41 0 .39.39.39 1.02 0 1.41L13.41 12l2.89 2.89c.38.38.38 1.02 0 1.41z"/></svg>
           </button>
         </div>

@@ -44,14 +44,8 @@
                       </button>
                     </div>
                     <div class="dialog__body">
-                      <div class="selector" data-controller="selector" data-selector-remote-url="<%= users_search_index_path %>">
-                        <div class="selector__input">
-                          <input type="text" value="" data-target="selector.input" placeholder="Name or Username">
-                        </div>
-                        <div class="selector__dropdown">
-                          <div class="list" data-target="selector.options">
-                          </div>
-                        </div>
+                      <div class="selector" data-controller="selector" data-selector-remote-url="<%= users_search_index_path %>" data-selector-placeholder="Name or username">
+                        <input type="hidden" data-target="selector.output">
                       </div>
                     </div>
                     <div class="dialog__footer">

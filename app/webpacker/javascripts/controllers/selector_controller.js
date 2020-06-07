@@ -2,14 +2,32 @@ import { Controller } from 'stimulus'
 import Rails from "@rails/ujs"
 
 export default class extends Controller {
-  static targets = ['input', 'item', 'option', 'options']
+  static targets = ['input', 'output', 'item', 'option', 'options']
 
   connect() {
+    this.init()
     this.inputTarget.addEventListener('keydown', this.keydown.bind(this))
     this.inputTarget.addEventListener('keyup', this.updateOptions.bind(this))
 
     this.index = 0
     this.updateSelected()
+  }
+
+  init() {
+    this.element.insertAdjacentHTML('beforeEnd', `
+    <div class="selector__input">
+      <input type="text" value="" data-target="selector.input" placeholder="${this.data.get('placeholder')}">
+    </div>
+    <div class="selector__dropdown">
+      <div class="list" data-target="selector.options">
+    </div>
+    `)
+  }
+
+  updateOutput() {
+    this.outputTarget.value = this.itemTargets.map((item) => {
+      return item.dataset.value
+    }).join(',')
   }
 
   keydown(event) {
@@ -148,10 +166,12 @@ export default class extends Controller {
       </div>
     `)
     this.inputTarget.value = ''
+    this.updateOutput()
   }
 
   remove(event) {
     event.currentTarget.closest('.chip').remove()
+    this.updateOutput()
   }
 
   removeLast() {
@@ -159,6 +179,7 @@ export default class extends Controller {
       let lastItem = this.itemTargets[this.itemTargets.length - 1]
       if (lastItem) {
         lastItem.remove()
+        this.updateOutput()
       }
     }
   }

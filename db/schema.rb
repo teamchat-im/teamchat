@@ -36,16 +36,6 @@ ActiveRecord::Schema.define(version: 2020_05_09_075732) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
-  create_table "memberships", force: :cascade do |t|
-    t.bigint "room_id"
-    t.bigint "user_id"
-    t.integer "role", default: 0
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["room_id"], name: "index_memberships_on_room_id"
-    t.index ["user_id"], name: "index_memberships_on_user_id"
-  end
-
   create_table "messages", force: :cascade do |t|
     t.bigint "room_id"
     t.bigint "user_id"
@@ -56,6 +46,16 @@ ActiveRecord::Schema.define(version: 2020_05_09_075732) do
     t.index ["room_id"], name: "index_messages_on_room_id"
     t.index ["uid"], name: "index_messages_on_uid", unique: true
     t.index ["user_id"], name: "index_messages_on_user_id"
+  end
+
+  create_table "room_memberships", force: :cascade do |t|
+    t.bigint "room_id"
+    t.bigint "user_id"
+    t.integer "role", default: 0
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["room_id"], name: "index_room_memberships_on_room_id"
+    t.index ["user_id"], name: "index_room_memberships_on_user_id"
   end
 
   create_table "rooms", force: :cascade do |t|

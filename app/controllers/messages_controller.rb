@@ -22,7 +22,7 @@ class MessagesController < ApplicationController
   def set_room
     @room = Room.find_by! uid: params[:room_id]
 
-    if !@room.memberships.where(user: current_user).exists?
+    if !@room.room_memberships.where(user: current_user).exists?
       raise ActiveRecord::RecordNotFound
       # TODO show require join room message
     end

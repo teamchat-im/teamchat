@@ -1,6 +1,6 @@
-class CreateMemberships < ActiveRecord::Migration[6.0]
+class CreateRoomMemberships < ActiveRecord::Migration[6.0]
   def change
-    create_table :memberships do |t|
+    create_table :room_memberships do |t|
       t.references :room
       t.references :user
       t.integer :role, default: 0

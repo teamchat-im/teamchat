@@ -19,7 +19,7 @@ class RoomsControllerTest < ActionDispatch::IntegrationTest
   test "should get private room for member" do
     sign_in create(:user)
     room = create(:room, visibility: 'private')
-    room.memberships.create(user: current_user, role: 'member')
+    room.room_memberships.create(user: current_user, role: 'member')
     get room_url(room)
     assert_response :success
   end

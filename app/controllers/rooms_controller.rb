@@ -7,7 +7,7 @@ class RoomsController < ApplicationController
     @room = Room.new room_params
 
     if @room.save
-      @room.memberships.create(user: current_user, role: 'owner')
+      @room.room_memberships.create(user: current_user, role: 'owner')
       redirect_to @room
     else
       render 'update_form'

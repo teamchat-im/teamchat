@@ -3,8 +3,8 @@ class User < ApplicationRecord
   has_secure_token :auth_token
   has_one_attached :avatar
 
-  has_many :memberships
-  has_many :rooms, through: :memberships
+  has_many :room_memberships
+  has_many :rooms, through: :room_memberships
   has_many :messages
 
   USERNAME_REGEXP = /\A[a-z0-9._=\-\/]+\z/

@@ -7,11 +7,8 @@ class Room < ApplicationRecord
     public: 2
   }, _prefix: true
 
-  has_many :memberships
-  has_many :users, through: :memberships
-  has_many :members, -> { where(memberships: { role: Membership.roles[:member] }) }, through: :memberships, source: :user
-  has_many :admins, -> { where(memberships: { role: Membership.roles[:admin] }) }, through: :memberships, source: :user
-  has_many :owners, -> { where(memberships: { role: Membership.roles[:owner] }) }, through: :memberships, source: :user
+  has_many :room_memberships
+  has_many :users, through: :room_memberships
   has_many :messages
 
   validates :uid, uniqueness: true
@@ -21,7 +18,7 @@ class Room < ApplicationRecord
   def visible_to?(user)
     case visibility
     when 'private'
-      memberships.where(user: user).exists?
+      room_memberships.where(user: user).exists?
     when 'internal'
       !!user
     when 'public'

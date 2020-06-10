@@ -4,7 +4,7 @@ class MessagesControllerTest < ActionDispatch::IntegrationTest
   test "should create message" do
     sign_in create(:user)
     room = create(:room)
-    room.memberships.create(user: current_user)
+    room.room_memberships.create(user: current_user)
     assert_difference "room.messages.count" do
       post room_messages_url(room), params: { message: { body: 'text ' } }, xhr: true
     end
